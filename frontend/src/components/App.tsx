@@ -1,10 +1,12 @@
-function App() {
+import { Container, Typography } from "@mui/material";
+import Header from "./Header";
+
+export default function App() {
 
   return (
-    <>
-        <p>Hello World!</p>
-    </>
-  )
+    <Container>
+      <Header />
+      <Typography>Hello World!</Typography>
+    </Container>
+  );
 }
-
-export default App
