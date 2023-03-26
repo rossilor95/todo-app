@@ -1,16 +1,9 @@
-import { AppBar, Box, Toolbar, Typography } from "@mui/material";
-
 export default function Header() {
   return (
-    <Box sx={{ flexGrow: 1, position: "sticky" }}>
-      <AppBar>
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Todo Demo App
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Toolbar />
-    </Box>
+    <div className="sticky bg-blue-500">
+        <div className="container mx-6 py-3">
+          <h1 className="text-white text-xl font-medium text-left">Todo App</h1>
+        </div>
+    </div>
   );
 }
