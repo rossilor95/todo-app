@@ -1,5 +1,3 @@
-import { Box, Container } from "@mui/material";
-import { Stack } from "@mui/system";
 import { useState } from "react";
 import CategoryToolbar from "./components/CategoryToolbar";
 import Header from "./components/Header";
@@ -26,13 +24,10 @@ export default function App() {
   };
 
   return (
-    <>
-        <Header />
-    <Container>
-        <CategoryToolbar selectedCategory="My day" />
-        <TodoList todos={todos} handleToggleTodo={handleToggleTodo} />
-    </Container>
-    </>
-
+    <div className="bg-gray-50 min-h-screen">
+      <Header />
+      <CategoryToolbar selectedCategory="My day" />
+      <TodoList todos={todos} handleToggleTodo={handleToggleTodo} />
+    </div>
   );
 }
