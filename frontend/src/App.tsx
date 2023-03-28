@@ -23,11 +23,24 @@ export default function App() {
     );
   };
 
+  const handleAddTodo = (text: string) => {
+    const newTodo: Todo = {
+      id: todos.length + 1,
+      text: text,
+      isCompleted: false,
+    };
+    setTodos((todos) => [ newTodo, ...todos]);
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen">
       <Header />
       <CategoryToolbar selectedCategory="My day" />
-      <TodoList todos={todos} handleToggleTodo={handleToggleTodo} />
+      <TodoList
+        todos={todos}
+        handleToggleTodo={handleToggleTodo}
+        handleAddTodo={handleAddTodo}
+      />
     </div>
   );
 }

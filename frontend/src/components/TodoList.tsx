@@ -1,4 +1,5 @@
 import { Todo } from "../interfaces";
+import NewTodoForm from "./NewTodoForm";
 
 interface TodoItemProps {
   todo: Todo;
@@ -8,6 +9,7 @@ interface TodoItemProps {
 interface TodoListProps {
   todos: Todo[];
   handleToggleTodo: (id: number) => void;
+  handleAddTodo: (text: string) => void;
 }
 
 function TodoItem({ todo, handleToggleTodo }: TodoItemProps) {
@@ -35,9 +37,10 @@ function TodoItem({ todo, handleToggleTodo }: TodoItemProps) {
   );
 }
 
-export default function TodoList({ todos, handleToggleTodo }: TodoListProps) {
+export default function TodoList({ todos, handleToggleTodo, handleAddTodo }: TodoListProps) {
   return (
     <ul className="mx-6">
+      <NewTodoForm handleAddTodo={handleAddTodo}/>
       {todos.map((todo) => (
         <TodoItem todo={todo} handleToggleTodo={handleToggleTodo} />
       ))}
