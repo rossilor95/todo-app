@@ -24,7 +24,7 @@ export default function TodoForm({ handleAddTodo }: TodoFormProps) {
         <HiPlus className="h-6 w-6 text-blue-600" />
         <form onSubmit={handleSubmitTodo}>
           <input
-            id="todo"
+            id="todo-new"
             className="border-none flex-grow ml-0.5 placeholder-blue-600 focus:ring-transparent focus:placeholder-black"
             type="text"
             value={todoText}
