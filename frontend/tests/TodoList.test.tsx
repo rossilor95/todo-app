@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vitest } from "vitest";
 import { Todo } from "../src/interfaces";
 import TodoList from "../src/components/TodoList";
+import userEvent from "@testing-library/user-event";
 
 const todos: Todo[] = [
   { id: 1, text: "Finalise presentation", isCompleted: true },
@@ -15,7 +16,14 @@ describe("TodoList", () => {
     const handleAddTodo = vitest.fn();
     const handleToggleTodo = vitest.fn();
     render(<TodoList todos={todos} handleAddTodo={handleAddTodo} handleToggleTodo={handleToggleTodo} />);
-    screen.debug();
     expect(screen.getAllByRole("listitem")).toHaveLength(todos.length + 1);
   });
+  it("should call handleToggleTodo when TodoItem checkbox is checked", async () => {
+    const user = userEvent.setup();
+    const handleAddTodo = vitest.fn();
+    const handleToggleTodo = vitest.fn();
+    render(<TodoList todos={todos} handleAddTodo={handleAddTodo} handleToggleTodo={handleToggleTodo} />);
+    await user.click(screen.getByLabelText("Finalise presentation"));
+    expect(handleToggleTodo).toHaveBeenCalledOnce();  
+  });                      
 });
