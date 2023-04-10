@@ -1,5 +1,5 @@
 import { Todo } from "../interfaces";
-import NewTodoForm from "./NewTodoForm";
+import TodoForm from "./TodoForm";
 
 interface TodoItemProps {
   todo: Todo;
@@ -36,7 +36,7 @@ function TodoItem({ todo, handleToggleTodo }: TodoItemProps) {
 export default function TodoList({ todos, handleToggleTodo, handleAddTodo }: TodoListProps) {
   return (
     <ul className="mx-6">
-      <NewTodoForm handleAddTodo={handleAddTodo} />
+      <TodoForm handleAddTodo={handleAddTodo} />
       {todos.map((todo) => (
         <TodoItem todo={todo} handleToggleTodo={handleToggleTodo} />
       ))}
