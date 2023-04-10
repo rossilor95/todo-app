@@ -3,12 +3,12 @@ import TodoForm from "./TodoForm";
 
 interface TodoItemProps {
   todo: Todo;
-  handleToggleTodo: (id: number) => void;
+  handleToggleTodo: (id: string) => void;
 }
 
 interface TodoListProps {
   todos: Todo[];
-  handleToggleTodo: (id: number) => void;
+  handleToggleTodo: (id: string) => void;
   handleAddTodo: (text: string) => void;
 }
 
@@ -38,7 +38,7 @@ export default function TodoList({ todos, handleToggleTodo, handleAddTodo }: Tod
     <ul className="mx-6">
       <TodoForm handleAddTodo={handleAddTodo} />
       {todos.map((todo) => (
-        <TodoItem todo={todo} handleToggleTodo={handleToggleTodo} />
+        <TodoItem key={todo.id} todo={todo} handleToggleTodo={handleToggleTodo} />
       ))}
     </ul>
   );
