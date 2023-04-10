@@ -1,18 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CategoryToolbar from "./components/CategoryToolbar";
 import Header from "./components/Header";
 import TodoList from "./components/TodoList";
 import { Todo } from "./interfaces";
 
 export default function App() {
-  const [todos, setTodos] = useState<Todo[]>([
-    { id: 1, text: "Finalise presentation", isCompleted: true },
-    { id: 2, text: "Book flight to London", isCompleted: false },
-    { id: 3, text: "Get flowers for nana", isCompleted: false },
-    { id: 4, text: "Get groceries for dinner", isCompleted: false },
-  ]);
+  const [todos, setTodos] = useState<Todo[]>([]);
 
-  const handleToggleTodo = (id: number) => {
+  useEffect(() => {
+    fetch("http://localhost:8080/api/v1/todos")
+      .then((response) => response.json())
+      .then((data) => setTodos(data))
+      .catch((error) => console.error("Error fetching data: ", error));
+  }, []);
+
+  const handleToggleTodo = (id: string) => {
     setTodos(
       todos.map((todo) => {
         if (todo.id === id) {
@@ -25,11 +27,11 @@ export default function App() {
 
   const handleAddTodo = (text: string) => {
     const newTodo: Todo = {
-      id: todos.length + 1,
+      id: (todos.length + 1).toString(),
       text: text,
       isCompleted: false,
     };
-    setTodos((todos) => [ newTodo, ...todos]);
+    setTodos((todos) => [newTodo, ...todos]);
   };
 
   return (
