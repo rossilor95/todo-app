@@ -1,6 +1,5 @@
 package com.github.rossilor95.todo_app.todo;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,7 +9,7 @@ import java.util.Date;
 public class Todo {
 
     @Id
-    private ObjectId id;
+    private String id;
 
     private String text;
     private Date dueDate;
@@ -20,7 +19,7 @@ public class Todo {
     private Todo() {
     }
 
-    public Todo(ObjectId id, String text, Date dueDate, boolean isCompleted, boolean isImportant) {
+    public Todo(String id, String text, Date dueDate, boolean isCompleted, boolean isImportant) {
         this.id = id;
         this.text = text;
         this.dueDate = dueDate;
@@ -28,11 +27,11 @@ public class Todo {
         this.isImportant = isImportant;
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 

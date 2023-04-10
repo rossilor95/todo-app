@@ -12,14 +12,14 @@ import java.util.List;
 public class Category {
 
     @Id
-    private ObjectId id;
+    private String id;
 
     private String name;
 
     @DocumentReference
     private List<Todo> todoIds;
 
-    public Category(ObjectId id, String name, List<Todo> todoIds) {
+    public Category(String id, String name, List<Todo> todoIds) {
         this.id = id;
         this.name = name;
         this.todoIds = todoIds;
@@ -28,11 +28,11 @@ public class Category {
     private Category() {
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
