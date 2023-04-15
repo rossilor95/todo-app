@@ -5,7 +5,9 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,10 +48,22 @@ public class TodoController {
                     .path("/{id}")
                     .buildAndExpand(savedTodo.id())
                     .toUri();
-            logger.info("New Todo created with id {}", savedTodo.id());
+            logger.info("Successfully created new todo with ID {}", savedTodo.id());
             return ResponseEntity.created(uriOfTodo).build();
         } catch (Exception e) {
             logger.error("Error occurred while saving Todo: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable String id) {
+        try {
+            todoRepository.deleteById(id);
+            logger.info("Successfully deleted todo with ID {}", id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            logger.error("Error occurred while deleting Todo: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
