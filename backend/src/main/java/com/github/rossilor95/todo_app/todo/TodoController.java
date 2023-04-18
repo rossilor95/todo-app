@@ -3,7 +3,6 @@ package com.github.rossilor95.todo_app.todo;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +35,7 @@ public class TodoController {
             return ResponseEntity.ok(todos);
         } catch (Exception e) {
             logger.error("Error occurred while finding todos: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.internalServerError().build();
         }
     }
 
@@ -52,7 +51,7 @@ public class TodoController {
             return ResponseEntity.created(uriOfTodo).build();
         } catch (Exception e) {
             logger.error("Error occurred while saving Todo: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.internalServerError().build();
         }
     }
 
@@ -64,7 +63,7 @@ public class TodoController {
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             logger.error("Error occurred while deleting Todo: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.internalServerError().build();
         }
     }
 }
