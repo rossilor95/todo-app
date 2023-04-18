@@ -48,7 +48,7 @@ public class TodoController {
                     .buildAndExpand(savedTodo.id())
                     .toUri();
             logger.info("Successfully created new todo with ID {}", savedTodo.id());
-            return ResponseEntity.created(uriOfTodo).build();
+            return ResponseEntity.created(uriOfTodo).body(savedTodo);
         } catch (Exception e) {
             logger.error("Error occurred while saving Todo: {}", e.getMessage());
             return ResponseEntity.internalServerError().build();
