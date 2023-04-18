@@ -3,14 +3,15 @@ import CategoryToolbar from "./components/CategoryToolbar";
 import Header from "./components/Header";
 import TodoList from "./components/TodoList";
 import { Todo } from "./interfaces";
+import axios from "./axios-config";
 
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/todos")
-      .then((response) => response.json())
-      .then((data) => setTodos(data))
+    axios
+      .get("/todos")
+      .then((response) => setTodos(response.data))
       .catch((error) => console.error("Error fetching data: ", error));
   }, []);
 
