@@ -17,6 +17,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+/**
+ * Controller for managing Todo items.
+ * Exposes REST endpoints for CRUD operations on Todo items.
+ */
 @RestController
 @RequestMapping("/api/v1/todos")
 public class TodoController {
@@ -28,6 +32,11 @@ public class TodoController {
         this.todoRepository = todoRepository;
     }
 
+    /**
+     * Retrieves all Todo items.
+     *
+     * @return a ResponseEntity containing a list of all Todo items and a success status.
+     */
     @GetMapping
     public ResponseEntity<List<Todo>> findAll() {
         try {
@@ -40,6 +49,13 @@ public class TodoController {
         }
     }
 
+
+    /**
+     * Saves a new Todo item.
+     *
+     * @param todo the Todo item to be saved.
+     * @return a ResponseEntity containing the saved Todo item and a success status.
+     */
     @PostMapping
     public ResponseEntity<Todo> save(@RequestBody Todo todo) {
         try {
@@ -56,6 +72,13 @@ public class TodoController {
         }
     }
 
+    /**
+     * Deletes a Todo item by its ID.
+     *
+     * @param id the ID of the Todo item to be deleted.
+     * @return a ResponseEntity with a success status if the Todo item was deleted,
+     * or a not found status if the Todo item could not be found.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable String id) {
         try {
