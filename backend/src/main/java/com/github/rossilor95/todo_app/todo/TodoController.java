@@ -39,14 +39,9 @@ public class TodoController {
      */
     @GetMapping
     public ResponseEntity<List<Todo>> findAll() {
-        try {
-            List<Todo> todos = todoRepository.findAll();
-            logger.info("Found {} todos", todos.size());
-            return ResponseEntity.ok(todos);
-        } catch (Exception e) {
-            logger.error("Error occurred while finding todos: {}", e.getMessage());
-            return ResponseEntity.internalServerError().build();
-        }
+        List<Todo> todos = todoRepository.findAll();
+        logger.info("Found {} todos", todos.size());
+        return ResponseEntity.ok(todos);
     }
 
 
@@ -88,9 +83,6 @@ public class TodoController {
         } catch (EmptyResultDataAccessException e) {
             logger.error("Error occurred while deleting Todo with ID {}: Todo not found", id);
             return ResponseEntity.notFound().build();
-        } catch (RuntimeException e) {
-            logger.error("Error occurred while deleting Todo with ID {}: {}", id, e.getMessage());
-            return ResponseEntity.internalServerError().build();
         }
     }
 }
