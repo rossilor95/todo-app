@@ -3,6 +3,7 @@ package com.github.rossilor95.todo_app.todo;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,8 +62,11 @@ public class TodoController {
             todoRepository.deleteById(id);
             logger.info("Successfully deleted todo with ID {}", id);
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            logger.error("Error occurred while deleting Todo: {}", e.getMessage());
+        } catch (EmptyResultDataAccessException e) {
+            logger.error("Error occurred while deleting Todo with ID {}: Todo not found", id);
+            return ResponseEntity.notFound().build();
+        } catch (RuntimeException e) {
+            logger.error("Error occurred while deleting Todo with ID {}: {}", id, e.getMessage());
             return ResponseEntity.internalServerError().build();
         }
     }
