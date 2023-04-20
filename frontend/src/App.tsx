@@ -12,7 +12,7 @@ export default function App() {
     axios
       .get("/todos")
       .then((response) => setTodos(response.data))
-      .catch((error) => console.error("Error fetching data: ", error));
+      .catch((error) => console.error("Error fetching Todos: ", error));
   }, []);
 
   const handleToggleTodo = (id: string) => {
@@ -28,11 +28,15 @@ export default function App() {
 
   const handleAddTodo = (text: string) => {
     const newTodo: Todo = {
-      id: (todos.length + 1).toString(),
       text: text,
+      dueDate: null,
       isCompleted: false,
+      isImportant: false
     };
-    setTodos((todos) => [newTodo, ...todos]);
+    axios
+      .post("/todos", newTodo)
+      .then((response) => setTodos((todos) => [response.data, ...todos]))
+      .catch((error) => console.error("Error creating new Todo: ", error));
   };
 
   return (
