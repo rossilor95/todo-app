@@ -6,3 +6,8 @@ spring:
       database: ${MONGODB_DB_NAME}
       username: ${MONGODB_USER}
       password: ${MONGODB_PASSWORD}
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
