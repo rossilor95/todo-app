@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CategoryToolbar from "./components/CategoryToolbar";
 import Header from "./components/Header";
 import TodoList from "./components/TodoList";
-import { Todo } from "./interfaces";
+import { Todo, TodoInput } from "./interfaces";
 import axios from "./axios-config";
 
 export default function App() {
@@ -27,7 +27,7 @@ export default function App() {
   };
 
   const handleAddTodo = (text: string) => {
-    const newTodo: Todo = {
+    const newTodo: TodoInput = {
       text: text,
       dueDate: null,
       isCompleted: false,
