@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +34,7 @@ public class TodoService {
         return saved;
     }
 
-    public Todo update(String id, Map<String, Object> updates) throws EmptyResultDataAccessException, IllegalArgumentException {
+    public Todo update(String id, Map<String, String> updates) throws EmptyResultDataAccessException, IllegalArgumentException {
         Todo todo = todoRepository.findById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));
         Todo updated = applyUpdate(todo, updates);
         todoRepository.save(updated);
@@ -55,18 +55,17 @@ public class TodoService {
      * @return the updated Todo item.
      * @throws IllegalArgumentException if any of the updates are invalid.
      */
-    private Todo applyUpdate(Todo todo, Map<String, Object> updates) {
+    private Todo applyUpdate(Todo todo, Map<String, String> updates) {
         final String id = todo.id();
         String text = todo.text();
-        Date dueDate = todo.dueDate();
+        LocalDate dueDate = todo.dueDate();
         boolean isCompleted = todo.isCompleted();
         boolean isImportant = todo.isImportant();
         for (var entry : updates.entrySet()) {
             switch (entry.getKey()) {
-                case "text" -> text = (String) entry.getValue();
-                case "dueDate" -> dueDate = (Date) entry.getValue();
-                case "isCompleted" -> isCompleted = (boolean) entry.getValue();
-                case "isImportant" -> isImportant = (boolean) entry.getValue();
+                case "text" -> text = entry.getValue();
+                case "dueDate" -> dueDate = LocalDate.parse(entry.getValue());
+                case "isCompleted", "isImportant" -> isCompleted = Boolean.parseBoolean(entry.getValue());
                 default -> throw new IllegalArgumentException("Invalid update field: " + entry.getKey());
             }
         }

@@ -67,7 +67,7 @@ public class TodoController {
      * item could not be found, or bad request status if the updates are invalid.
      */
     @PatchMapping("/{id}")
-    public ResponseEntity<Todo> update(@PathVariable String id, @RequestBody Map<String, Object> updates) {
+    public ResponseEntity<Todo> update(@PathVariable String id, @RequestBody Map<String, String> updates) {
         try {
             Todo updated = todoService.update(id, updates);
             URI uri = buildUri(updated);
