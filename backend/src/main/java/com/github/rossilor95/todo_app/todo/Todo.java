@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.Nullable;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * <p>A class representing a Todo item.</p>
@@ -21,5 +21,5 @@ import java.util.Date;
  * It also includes built-in implementations of {@code equals}, {@code hashCode}, and {@code toString}.
  */
 @Document(collection = "todos")
-public record Todo(@Id String id, String text, @Nullable Date dueDate, boolean isCompleted, boolean isImportant) {
+public record Todo(@Id String id, String text, @Nullable LocalDate dueDate, boolean isCompleted, boolean isImportant) {
 }
